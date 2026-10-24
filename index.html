@@ -50,11 +50,11 @@ body{background:#F4F6F8;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",
       </div>
     </div>
     <div class="grid grid-cols-3 gap-2 text-center">
-      <div class="bg-red-50 rounded-xl p-2"><p class="text-[10px] text-red-500 font-bold uppercase">Faltantes</p><p id="perFaltante" class="text-xs font-black text-red-600">S/ 0.00</p></div>
-      <div class="bg-blue-50 rounded-xl p-2"><p class="text-[10px] text-blue-500 font-bold uppercase">Sobrantes</p><p id="perSobrante" class="text-xs font-black text-blue-600">S/ 0.00</p></div>
-      <div class="bg-gray-100 rounded-xl p-2"><p class="text-[10px] text-gray-500 font-bold uppercase">Cuadres</p><p id="perCantidad" class="text-xs font-black text-gray-700">0</p></div>
+      <div class="bg-red-50 border border-red-100 rounded-xl p-2"><p class="text-[10px] text-red-500 font-bold uppercase">Faltantes</p><p id="perFaltante" class="text-xs font-black text-red-600">- S/ 0.00</p></div>
+      <div class="bg-blue-50 border border-blue-100 rounded-xl p-2"><p class="text-[10px] text-blue-500 font-bold uppercase">Sobrantes</p><p id="perSobrante" class="text-xs font-black text-blue-600">+ S/ 0.00</p></div>
+      <div class="bg-gray-100 border border-gray-200 rounded-xl p-2"><p class="text-[10px] text-gray-500 font-bold uppercase">Cuadres</p><p id="perCantidad" class="text-xs font-black text-gray-700">0</p></div>
     </div>
-    <div id="perBadge" class="p-3 rounded-xl bg-gray-800 text-center text-white">
+    <div id="perBadge" class="p-3 rounded-xl bg-gray-800 text-center text-white transition-all">
       <p class="text-[10px] text-gray-400 uppercase font-bold tracking-wider">Resultado del Periodo (neto)</p>
       <p id="perNeto" class="text-2xl font-black">S/ 0.00</p>
       <p id="perEstado" class="text-xs font-bold mt-0.5 text-gray-300">Seleccione fechas</p>
@@ -109,8 +109,8 @@ body{background:#F4F6F8;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",
       <i data-lucide="minus-circle" class="w-4 h-4 text-red-500"></i> 3. Restar Financiación / Créditos
     </h2>
     <div class="relative">
-      <span class="absolute left-3 top-2 text-red-400 font-bold text-xs">S/</span>
-      <input type="number" step="0.01" id="montoFinanciacion" placeholder="0.00" oninput="calcularCuadre()" class="w-full bg-gray-50 border border-gray-200 rounded-xl pl-8 pr-3 py-2 text-sm font-bold text-red-600 focus:ring-2 focus:ring-red-400 focus:outline-none">
+      <span class="absolute left-3 top-2 text-red-500 font-bold text-xs">S/</span>
+      <input type="number" step="0.01" id="montoFinanciacion" placeholder="0.00" oninput="calcularCuadre()" class="w-full bg-red-50/50 border border-red-200 rounded-xl pl-8 pr-3 py-2 text-sm font-bold text-red-600 focus:ring-2 focus:ring-red-400 focus:outline-none">
     </div>
     <p class="text-[10px] text-gray-400 mt-1">Vales corporativos o flota a descontar.</p>
   </section>
@@ -137,7 +137,7 @@ body{background:#F4F6F8;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",
     <div class="space-y-1.5 text-xs text-gray-300">
       <div class="flex justify-between"><span>(+) Depósitos Efectivo:</span><span id="resEfectivo" class="font-semibold text-white">S/ 0.00</span></div>
       <div class="flex justify-between"><span>(+) Tarjetas:</span><span id="resTarjeta" class="font-semibold text-white">S/ 0.00</span></div>
-      <div class="flex justify-between text-red-300"><span>(-) Financiación:</span><span id="resFinanciacion" class="font-semibold">S/ 0.00</span></div>
+      <div class="flex justify-between text-red-400"><span>(-) Financiación:</span><span id="resFinanciacion" class="font-bold text-red-400">- S/ 0.00</span></div>
       <div class="border-t border-gray-700 pt-1.5 flex justify-between font-medium text-white"><span>(=) Total Entregado:</span><span id="resEntregado" class="font-bold">S/ 0.00</span></div>
       <div class="flex justify-between font-medium text-white"><span>(-) Gran Total Surtidor:</span><span id="resGranTotal" class="font-bold">S/ 0.00</span></div>
     </div>
@@ -184,7 +184,7 @@ body{background:#F4F6F8;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",
     <div class="space-y-1.5 text-xs border-t pt-4 border-gray-300">
       <div class="flex justify-between"><span>Total Depósitos Efectivo:</span><span id="pdfEfectivo" class="font-bold"></span></div>
       <div class="flex justify-between"><span>Tarjetas (Débito/Crédito):</span><span id="pdfTarjeta" class="font-bold"></span></div>
-      <div class="flex justify-between text-red-600"><span>(-) Financiación / Créditos:</span><span id="pdfFinanciacion" class="font-bold"></span></div>
+      <div class="flex justify-between text-red-600"><span>(-) Financiación / Créditos:</span><span id="pdfFinanciacion" class="font-bold text-red-600"></span></div>
       <div class="flex justify-between border-t pt-1 font-bold text-sm"><span>Total Entregado:</span><span id="pdfEntregado"></span></div>
       <div class="flex justify-between font-bold text-sm"><span>Venta Total Surtidor:</span><span id="pdfGranTotal"></span></div>
     </div>
@@ -201,7 +201,7 @@ body{background:#F4F6F8;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
 import { getFirestore, collection, addDoc, onSnapshot, query, orderBy, doc, updateDoc, deleteDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 
-// CONFIGURACIÓN DE TU FIREBASE (Con tus credenciales reales integradas)
+// CONFIGURACIÓN DE TU FIREBASE
 const firebaseConfig = {
   apiKey: "AIzaSyAvPYGxzp1CFjkT_gcigDod14dxDw9YBgs",
   authDomain: "prifast-9e947.firebaseapp.com",
@@ -264,21 +264,27 @@ window.calcularCuadre = function () {
   const d = obtenerDatos();
   document.getElementById('resEfectivo').innerText = fmt(d.totalEfectivo);
   document.getElementById('resTarjeta').innerText = fmt(d.tarjeta);
-  document.getElementById('resFinanciacion').innerText = fmt(d.financiacion);
+  document.getElementById('resFinanciacion').innerText = `- ${fmt(d.financiacion)}`;
   document.getElementById('resEntregado').innerText = fmt(d.totalEntregado);
   document.getElementById('resGranTotal').innerText = fmt(d.granTotal);
   const badge = document.getElementById('badgeEstado');
-  document.getElementById('montoDiferencia').innerText = fmt(Math.abs(d.diferencia));
   const t = document.getElementById('textoEstado');
+
   if (Math.abs(d.diferencia) < 0.01) {
+    document.getElementById('montoDiferencia').innerText = fmt(0);
+    document.getElementById('montoDiferencia').className = "text-2xl font-black text-emerald-400";
     badge.className = "mt-3 p-3 rounded-xl bg-emerald-950 text-center text-white border border-emerald-500";
     t.innerText = "CUADRE PERFECTO";
   } else if (d.diferencia < 0) {
+    document.getElementById('montoDiferencia').innerText = `- ${fmt(Math.abs(d.diferencia))}`;
+    document.getElementById('montoDiferencia').className = "text-2xl font-black text-red-400";
     badge.className = "mt-3 p-3 rounded-xl bg-red-950 text-center text-white border border-red-500";
-    t.innerText = `FALTANTE DE CAJA (${fmt(Math.abs(d.diferencia))})`;
+    t.innerText = `FALTANTE DE CAJA (- ${fmt(Math.abs(d.diferencia))})`;
   } else {
+    document.getElementById('montoDiferencia').innerText = `+ ${fmt(d.diferencia)}`;
+    document.getElementById('montoDiferencia').className = "text-2xl font-black text-blue-400";
     badge.className = "mt-3 p-3 rounded-xl bg-blue-950 text-center text-white border border-blue-500";
-    t.innerText = `SOBRANTE DE CAJA (${fmt(d.diferencia)})`;
+    t.innerText = `SOBRANTE DE CAJA (+ ${fmt(d.diferencia)})`;
   }
 };
 
@@ -301,27 +307,34 @@ function datosPeriodo() {
 }
 
 function estadoDe(dif) {
-  if (Math.abs(dif) < 0.01) return { txt: 'CUADRÓ', cls: 'bg-emerald-950 border border-emerald-500', pdf: '#166534', bg: '#f0fdf4' };
-  if (dif < 0) return { txt: 'FALTANTE', cls: 'bg-red-950 border border-red-500', pdf: '#991b1b', bg: '#fef2f2' };
-  return { txt: 'SOBRANTE', cls: 'bg-blue-950 border border-blue-500', pdf: '#1e40af', bg: '#eff6ff' };
+  if (Math.abs(dif) < 0.01) return { txt: 'CUADRÓ', cls: 'bg-emerald-950 border border-emerald-500 text-emerald-400', pdf: '#166534', bg: '#f0fdf4' };
+  if (dif < 0) return { txt: 'FALTANTE', cls: 'bg-red-950 border border-red-500 text-red-400', pdf: '#dc2626', bg: '#fef2f2' };
+  return { txt: 'SOBRANTE', cls: 'bg-blue-950 border border-blue-500 text-blue-400', pdf: '#2563eb', bg: '#eff6ff' };
 }
 
 window.calcularPeriodo = function () {
   const p = datosPeriodo();
-  document.getElementById('perFaltante').innerText = fmt(Math.abs(p.faltante));
-  document.getElementById('perSobrante').innerText = fmt(p.sobrante);
+  document.getElementById('perFaltante').innerText = `- ${fmt(Math.abs(p.faltante))}`;
+  document.getElementById('perSobrante').innerText = `+ ${fmt(p.sobrante)}`;
   document.getElementById('perCantidad').innerText = p.lista.length;
-  document.getElementById('perNeto').innerText = fmt(Math.abs(p.neto));
+  
   const e = estadoDe(p.neto);
   const b = document.getElementById('perBadge');
+  const elemNeto = document.getElementById('perNeto');
+
   if (!p.lista.length) {
     b.className = "p-3 rounded-xl bg-gray-800 text-center text-white";
+    elemNeto.innerText = "S/ 0.00";
+    elemNeto.className = "text-2xl font-black text-white";
     document.getElementById('perEstado').innerText = "Sin cuadres en este periodo";
     return;
   }
-  b.className = `p-3 rounded-xl text-center text-white ${e.cls}`;
+
+  b.className = `p-3 rounded-xl text-center ${e.cls}`;
+  elemNeto.innerText = `${p.neto < -0.01 ? '- ' : p.neto > 0.01 ? '+ ' : ''}${fmt(Math.abs(p.neto))}`;
+  elemNeto.className = `text-2xl font-black ${p.neto < -0.01 ? 'text-red-400' : p.neto > 0.01 ? 'text-blue-400' : 'text-emerald-400'}`;
   document.getElementById('perEstado').innerText =
-    e.txt === 'CUADRÓ' ? 'EL PERIODO CUADRÓ' : `${e.txt} NETO DEL PERIODO`;
+    e.txt === 'CUADRÓ' ? 'EL PERIODO CUADRÓ PERFECTO' : `${e.txt} NETO DEL PERIODO`;
 };
 
 window.descargarReportePeriodo = function () {
@@ -337,7 +350,7 @@ window.descargarReportePeriodo = function () {
       <td style="padding:5px;border:1px solid #ddd">${esc(c.despachador)}</td>
       <td style="padding:5px;border:1px solid #ddd;text-align:right">${fmt(c.totalEntregado)}</td>
       <td style="padding:5px;border:1px solid #ddd;text-align:right">${fmt(c.granTotal)}</td>
-      <td style="padding:5px;border:1px solid #ddd;text-align:right;font-weight:bold;color:${s.pdf}">${c.diferencia < 0 ? '-' : c.diferencia > 0.01 ? '+' : ''}${fmt(Math.abs(c.diferencia))} ${s.txt}</td>
+      <td style="padding:5px;border:1px solid #ddd;text-align:right;font-weight:bold;color:${s.pdf}">${c.diferencia < -0.01 ? '- ' : c.diferencia > 0.01 ? '+ ' : ''}${fmt(Math.abs(c.diferencia))} ${s.txt}</td>
     </tr>`;
   }).join('');
   const el = document.createElement('div');
@@ -359,8 +372,8 @@ window.descargarReportePeriodo = function () {
       <div style="display:flex;justify-content:space-between"><span>Cantidad de cuadres:</span><b>${p.lista.length}</b></div>
       <div style="display:flex;justify-content:space-between"><span>Total entregado:</span><b>${fmt(p.entregado)}</b></div>
       <div style="display:flex;justify-content:space-between"><span>Total venta surtidor:</span><b>${fmt(p.surtidor)}</b></div>
-      <div style="display:flex;justify-content:space-between;color:#991b1b"><span>Total faltantes:</span><b>- ${fmt(Math.abs(p.faltante))}</b></div>
-      <div style="display:flex;justify-content:space-between;color:#1e40af"><span>Total sobrantes:</span><b>+ ${fmt(p.sobrante)}</b></div>
+      <div style="display:flex;justify-content:space-between;color:#dc2626"><span>Total faltantes:</span><b>- ${fmt(Math.abs(p.faltante))}</b></div>
+      <div style="display:flex;justify-content:space-between;color:#2563eb"><span>Total sobrantes:</span><b>+ ${fmt(p.sobrante)}</b></div>
     </div>
     <div style="margin-top:16px;padding:14px;border:2px solid ${e.pdf};background:${e.bg};color:${e.pdf};text-align:center;border-radius:10px">
       <div style="font-size:11px;font-weight:bold">RESULTADO NETO DEL PERIODO</div>
@@ -460,7 +473,89 @@ window.descargarPDFTurno = function () {
   document.getElementById('pdfDespachador').innerText = d.despachador;
   document.getElementById('pdfEfectivo').innerText = fmt(d.totalEfectivo);
   document.getElementById('pdfTarjeta').innerText = fmt(d.tarjeta);
-  document.getElementById('pdfFinanciacion').innerText = fmt(d.financiacion);
+  document.getElementById('pdfFinanciacion').innerText = `- ${fmt(d.financiacion)}`;
   document.getElementById('pdfEntregado').innerText = fmt(d.totalEntregado);
   document.getElementById('pdfGranTotal').innerText = fmt(d.granTotal);
-  const box =
+  const box = document.getElementById('pdfBoxEstado');
+  if (Math.abs(d.diferencia) < 0.01) {
+    box.className = "p-4 rounded-xl text-center border-2 border-emerald-600 bg-emerald-50 text-emerald-900";
+    document.getElementById('pdfEstadoTexto').innerText = "CUADRE EXACTO";
+    document.getElementById('pdfDiferencia').innerText = "Diferencia: S/ 0.00";
+  } else if (d.diferencia < 0) {
+    box.className = "p-4 rounded-xl text-center border-2 border-red-600 bg-red-50 text-red-900";
+    document.getElementById('pdfEstadoTexto').innerText = "FALTANTE DE CAJA";
+    document.getElementById('pdfDiferencia').innerText = `- ${fmt(Math.abs(d.diferencia))}`;
+  } else {
+    box.className = "p-4 rounded-xl text-center border-2 border-blue-600 bg-blue-50 text-blue-900";
+    document.getElementById('pdfEstadoTexto').innerText = "SOBRANTE DE CAJA";
+    document.getElementById('pdfDiferencia').innerText = `+ ${fmt(d.diferencia)}`;
+  }
+  const element = document.getElementById('pdfTemplate');
+  element.parentElement.classList.remove('hidden');
+  html2pdf().set({
+    margin: 10, filename: `Cuadre_Primax_${d.despachador}_${d.fecha}.pdf`,
+    image: { type: 'jpeg', quality: 0.98 }, html2canvas: { scale: 2 },
+    jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+  }).from(element).save().then(() => element.parentElement.classList.add('hidden'));
+};
+
+window.enviarWhatsApp = function () {
+  const d = obtenerDatos();
+  let estado = "EXACTO (S/ 0.00)";
+  if (d.diferencia < -0.01) estado = `🔴 FALTANTE (- ${fmt(Math.abs(d.diferencia))})`;
+  if (d.diferencia > 0.01) estado = `🔵 SOBRANTE (+ ${fmt(d.diferencia)})`;
+  let msg = `⛽ *CUADRE DE CAJA PRIMAX* ⛽\n📅 *Fecha:* ${d.fecha}\n⏰ *Turno:* ${d.turno}\n👤 *Despachador:* ${d.despachador}\n\n`;
+  msg += `💵 *Depósitos Efectivo:* ${fmt(d.totalEfectivo)}\n💳 *Tarjetas:* ${fmt(d.tarjeta)}\n🔴 *Financiación:* - ${fmt(d.financiacion)}\n`;
+  msg += `------------------------------------\n💰 *TOTAL ENTREGADO:* ${fmt(d.totalEntregado)}\n📊 *GRAN TOTAL SURTIDOR:* ${fmt(d.granTotal)}\n`;
+  msg += `------------------------------------\n📌 *ESTADO:* ${estado}`;
+  window.open(`https://api.whatsapp.com/send?text=${encodeURIComponent(msg)}`, '_blank');
+};
+
+// ---------- HISTORIAL ----------
+function renderHistorial() {
+  const list = document.getElementById('historialList');
+  if (!cuadres.length) {
+    list.innerHTML = '<p class="text-center py-3 text-gray-400 text-xs">No hay cuadres guardados aún.</p>';
+    return;
+  }
+  const modo = db ? '' : '<p class="text-center py-1 text-amber-600 font-medium">Modo local</p>';
+  list.innerHTML = modo + cuadres.map(c => {
+    const s = estadoDe(c.diferencia);
+    const signo = c.diferencia < -0.01 ? '- ' : c.diferencia > 0.01 ? '+ ' : '';
+    const id = esc(c.id);
+    return `
+    <div class="p-3 bg-gray-50 border border-gray-200 rounded-xl space-y-1.5">
+      <div class="flex justify-between items-center">
+        <div>
+          <p class="font-bold text-gray-800 text-xs">${esc(c.despachador)}</p>
+          <p class="text-[10px] text-gray-400">${esc(c.fecha)} • Turno ${esc(c.turno)}</p>
+        </div>
+        <div class="flex items-center gap-1">
+          <span class="text-[10px] font-black px-2 py-1 rounded-full" style="color:${s.pdf};background:${s.bg}">${s.txt}</span>
+          <button onclick="editarRegistro('${id}')" class="p-1.5 text-gray-500 hover:text-primax-orange rounded-lg" title="Editar"><i data-lucide="pencil" class="w-4 h-4"></i></button>
+          <button onclick="eliminarRegistro('${id}')" class="p-1.5 text-gray-500 hover:text-red-600 rounded-lg" title="Eliminar"><i data-lucide="trash-2" class="w-4 h-4"></i></button>
+        </div>
+      </div>
+      <div class="flex justify-between text-[10px] font-semibold text-gray-500">
+        <span>Entregado: ${fmt(c.totalEntregado)}</span>
+        <span>Surtidor: ${fmt(c.granTotal)}</span>
+      </div>
+      <div class="flex justify-between text-xs font-black border-t border-gray-200 pt-1.5" style="color:${s.pdf}">
+        <span>Monto final</span><span>${signo}${fmt(Math.abs(c.diferencia))}</span>
+      </div>
+    </div>`;
+  }).join('');
+  lucide.createIcons();
+}
+
+function escucharCuadresNube() {
+  const q = query(collection(db, "cuadres_primax"), orderBy("creadoEl", "desc"));
+  onSnapshot(q, snap => {
+    cuadres = snap.docs.map(d => ({ ...d.data(), id: d.id }));
+    renderHistorial();
+    calcularPeriodo();
+  });
+}
+</script>
+</body>
+</html>
